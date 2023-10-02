@@ -3,14 +3,11 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="..\vsprop\StdMacros.props" />
     <Import Project="..\vsprop\Executable.props" />
+    <Import Project="..\vsprop\NoSecureWarnings.props" />
     <Import Project="..\vsprop\IncludePath.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
-  <ItemDefinitionGroup>
-    <Link>
-      <ModuleDefinitionFile>ZlsThumbnailProvider.def</ModuleDefinitionFile>
-    </Link>
-  </ItemDefinitionGroup>
+  <ItemDefinitionGroup />
   <ItemGroup />
 </Project>

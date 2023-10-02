@@ -14,10 +14,11 @@
 
 extern HRESULT CRecipeThumbProvider_CreateInstance(REFIID riid, void** ppv);
 
-#define SZ_CLSID_RECIPETHUMBHANDLER     L"{50d9450f-2a80-4f08-93b9-2eb526477d1b}"
-#define SZ_RECIPETHUMBHANDLER           L"Recipe Thumbnail Handler"
+#define SZ_CLSID_ZLSTHUMBHANDLER     L"{DBA6A0C8-FDBA-486C-8EEF-BB158F263DBE}"
+#define SZ_RECIPETHUMBHANDLER           L"Zls Thumbnail Handler"
 
-const CLSID CLSID_RecipeThumbHandler = { 0x50d9450f, 0x2a80, 0x4f08, {0x93, 0xb9, 0x2e, 0xb5, 0x26, 0x47, 0x7d, 0x1b} };
+// {DBA6A0C8-FDBA-486C-8EEF-BB158F263DBE}                                       
+const CLSID CLSID_RecipeThumbHandler = { 0xdba6a0c8, 0xfdba, 0x486c, { 0x8e, 0xef, 0xbb, 0x15, 0x8f, 0x26, 0x3d, 0xbe } };
 
 typedef HRESULT(*PFNCREATEINSTANCE)(REFIID riid, void** ppvObject);
 struct CLASS_OBJECT_INIT
@@ -200,10 +201,10 @@ STDAPI DllRegisterServer()
         const REGISTRY_ENTRY rgRegistryEntries[] =
         {
             // RootKey            KeyName                                                                ValueName                     Data
-            {HKEY_CURRENT_USER,   L"Software\\Classes\\CLSID\\" SZ_CLSID_RECIPETHUMBHANDLER,                                 NULL,                           SZ_RECIPETHUMBHANDLER},
-            {HKEY_CURRENT_USER,   L"Software\\Classes\\CLSID\\" SZ_CLSID_RECIPETHUMBHANDLER L"\\InProcServer32",             NULL,                           szModuleName},
-            {HKEY_CURRENT_USER,   L"Software\\Classes\\CLSID\\" SZ_CLSID_RECIPETHUMBHANDLER L"\\InProcServer32",             L"ThreadingModel",              L"Apartment"},
-            {HKEY_CURRENT_USER,   L"Software\\Classes\\.recipe\\ShellEx\\{e357fccd-a995-4576-b01f-234630154e96}",            NULL,                           SZ_CLSID_RECIPETHUMBHANDLER},
+            {HKEY_CURRENT_USER,   L"Software\\Classes\\CLSID\\" SZ_CLSID_ZLSTHUMBHANDLER,                              NULL,                           SZ_RECIPETHUMBHANDLER},
+            {HKEY_CURRENT_USER,   L"Software\\Classes\\CLSID\\" SZ_CLSID_ZLSTHUMBHANDLER L"\\InProcServer32",          NULL,                           szModuleName},
+            {HKEY_CURRENT_USER,   L"Software\\Classes\\CLSID\\" SZ_CLSID_ZLSTHUMBHANDLER L"\\InProcServer32",          L"ThreadingModel",              L"Apartment"},
+            {HKEY_CURRENT_USER,   L"Software\\Classes\\.zls\\ShellEx\\{e357fccd-a995-4576-b01f-234630154e96}",            NULL,                           SZ_CLSID_ZLSTHUMBHANDLER},
         };
 
         hr = S_OK;
@@ -230,8 +231,8 @@ STDAPI DllUnregisterServer()
 
     const PCWSTR rgpszKeys[] =
     {
-        L"Software\\Classes\\CLSID\\" SZ_CLSID_RECIPETHUMBHANDLER,
-        L"Software\\Classes\\.recipe\\ShellEx\\{e357fccd-a995-4576-b01f-234630154e96}"
+        L"Software\\Classes\\CLSID\\" SZ_CLSID_ZLSTHUMBHANDLER,
+        L"Software\\Classes\\.zls\\ShellEx\\{e357fccd-a995-4576-b01f-234630154e96}"
     };
 
     // Delete the registry entries
