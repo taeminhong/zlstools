@@ -10,7 +10,7 @@
 AppName=zlstools
 AppVersion=0.1.0
 WizardStyle=modern
-DefaultDirName={autopf}\zlstools
+DefaultDirName={userpf}\zlstools
 DefaultGroupName=zlstools
 Compression=lzma2
 SolidCompression=yes
@@ -23,14 +23,16 @@ ArchitecturesAllowed=x64
 ; done in "64-bit mode" on x64, meaning it should use the native
 ; 64-bit Program Files directory and the 64-bit view of the registry.
 ArchitecturesInstallIn64BitMode=x64
+PrivilegesRequired=lowest
 
 [Files]
 Source: "bin\x64\Release\zlsthumb.exe"; DestDir: "{app}";
 Source: "bin\x64\Release\ZlsThumbnailProvider.dll"; DestDir: "{app}"; Flags: regserver
-Source: "{tmp}\vc_redist.x64.exe"; DestDir: "{tmp}"; Flags: external
+Source: "{tmp}\vc_redist.x64.exe"; DestDir: "{tmp}"; Flags: external; Check: NeedsToInstallVCRedist
 
 [Run]
-Filename: {tmp}\vc_redist.x64.exe; Parameters: "/q /passive /Q:a"; StatusMsg: "Installing VC Redistributalbes..."
+Filename: {tmp}\vc_redist.x64.exe; Parameters: "/q /passive /Q:a"; \
+  StatusMsg: "Installing VC Redistributalbes..."; Check: NeedsToInstallVCRedist
 
 [Code]
 var
@@ -43,6 +45,18 @@ begin
   Result := True;
 end;
 
+function NeedsToInstallVCRedist: Boolean;
+var
+  installed: Cardinal;
+  key: String;
+begin
+  Result := True;
+  key := 'SOFTWARE\Wow6432Node\Microsoft\DevDiv\vc\Servicing\14.0\RuntimeMinimum';
+  if RegQueryDWordValue(HKLM, key, 'Install', installed) then begin
+      Result := (installed <> 1);
+  end;
+end;
+
 procedure InitializeWizard;
 begin
   DownloadPage := CreateDownloadPage(SetupMessage(msgWizardPreparing), SetupMessage(msgPreparingDesc), @OnDownloadProgress);
@@ -50,7 +64,7 @@ end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;
 begin
-  if CurPageID = wpReady then begin
+  if (CurPageID = wpReady) and NeedsToInstallVCRedist then begin
     DownloadPage.Clear;
     // Use AddEx to specify a username and password
     DownloadPage.Add('https://aka.ms/vs/17/release/vc_redist.x64.exe', 'vc_redist.x64.exe', '');
