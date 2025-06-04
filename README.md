@@ -23,3 +23,8 @@ Build steps:
 5. From the menu, select "Build" > "Complie".
 
 The installer(zlstools-<version>.exe) will be generated in the project root directory.
+
+# Miniz
+
+This project depends on Miniz, a compression library. A minor modification has been made to suit this project's needs.
+Miniz is distributed under the MIT License. For more details, please visit the [Miniz project page](https://github.com/richgel999/miniz).
