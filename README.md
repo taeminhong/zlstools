@@ -1,6 +1,6 @@
 # What Is This Project?
 
-zlstools is a collection of command-line tools and shell extensions for viewing or extract data from `.zls` files.
+zlstools is a collection of command-line tools and shell extensions for viewing or extracting data from `.zls` files.
 
 Included Tools:
 
