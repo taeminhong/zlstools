@@ -1,11 +1,11 @@
 # What Is This Project?
 
-zlstools is a collection of command-line tools and plugins for viewing or extract data from `.zls` files.
+zlstools is a collection of command-line tools and shell extensions for viewing or extract data from `.zls` files.
 
 Included Tools:
 
 - zlsthumb: Extracts draping item images from `.zls` files.
-- ZlsThumbnailprovider: A Windows Explorer plugins that enables `.zls` file previews.
+- ZlsThumbnailprovider: A Windows Explorer extension that enables `.zls` file previews.
 
 # How To Build
 
