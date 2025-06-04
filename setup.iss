@@ -15,7 +15,7 @@ DefaultGroupName=zlstools
 Compression=lzma2
 SolidCompression=yes
 OutputDir=.\
-OutputBaseFilename=zlstools-0.1.0-rc1-x64
+OutputBaseFilename=zlstools-0.1.0-rc2-x64
 ; "ArchitecturesAllowed=x64" specifies that Setup cannot run on
 ; anything but x64.
 ArchitecturesAllowed=x64
@@ -23,11 +23,11 @@ ArchitecturesAllowed=x64
 ; done in "64-bit mode" on x64, meaning it should use the native
 ; 64-bit Program Files directory and the 64-bit view of the registry.
 ArchitecturesInstallIn64BitMode=x64
-PrivilegesRequired=lowest
+PrivilegesRequired=admin
 
 [Files]
 Source: "bin\x64\Release\zlsthumb.exe"; DestDir: "{app}";
-Source: "bin\x64\Release\ZlsThumbnailProvider.dll"; DestDir: "{app}"; Flags: regserver
+Source: "bin\x64\Release\ZlsThumbnailProvider.dll"; DestDir: "{app}"; Flags: regserver uninsrestartdelete restartreplace
 Source: "{tmp}\vc_redist.x64.exe"; DestDir: "{tmp}"; Flags: external; Check: NeedsToInstallVCRedist
 
 [Run]
